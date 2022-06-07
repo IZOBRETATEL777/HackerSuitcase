@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>title</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:replace="header :: content"></div>
+	<!-- main image -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<img src="hacker-main.jpg" class="img-responsive" width="1200" height="400" align="center">
+			</div>
+		</div>
+	</div>
+	<div class="container text-center">
+        <nav>
+            <ul>
+                <li><a th:href="@{/register}">Register</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/posts}">Posts</a></li>
+                <li><a th:href="@{/posts/new}">New Post</a></li>
+            </ul>
+        </nav>
+	</div>
+	<div th:replace="footer :: content"></div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div th:replace="header :: content"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p th:text="${post.getCreated()} ? ${#calendars.format(post.getCreated(), 'HH:mm dd MMMM yyyy')}"></p>
+                <p th:text="${post.getAuthor().getFirstName()}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 th:text="${post.getTitle()}"></h2>
+                <p th:text="${post.getContent()}"></p>
+            </div>
+        </div>
+
+        <div class="row" th:if="${authentication.getName()} eq ${post.getAuthor().getEmail()}">
+            <div class="col-md-12">
+                <a th:href="@{/posts/delete/} + ${post.id}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <h3>Comments</h3>
+        <ul>
+            <li th:each="comment : ${post.getComments()}">
+                <p th:text="${comment.getAuthor().getFirstName()}"></p>
+                <p th:text="${comment.getCreated()}"></p>
+                <p th:text="${comment.getContent()}"></p>
+                <div class="row" >
+                    <div class="col-md-12">
+                        <a th:href="@{/comments/delete/} + ${comment.id}" class="btn btn-danger" th:if="${authentication.getName()} eq ${comment.getAuthor().getEmail()}">Delete</a>
+                        <a th:href="@{/comments/like/} + ${comment.id}" class="btn btn-primary">Like</a>
+                        <a th:href="@{/comments/dislike/} + ${comment.id}" class="btn btn-primary">Dislike</a>
+                        <span th:text="${comment.rating}"></span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container" sec:authorize="isAuthenticated()">
+        <div class="row">
+            <div class="col-md-12">
+                <form th:action="@{/posts/} + ${post.id}" th:object="${newComment}" method="POST">
+                    <form>
+                        <div class="form-group">
+                            <label for="content">Your reply</label>
+                            <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="red-text">Invalid
+                                content!</p>
+                            <textarea th:field="*{content}" class="form-control" id="content" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="footer :: content"></div>
+</body>
+
+</html>

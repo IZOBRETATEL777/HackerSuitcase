@@ -1,0 +1,22 @@
+server:
+  port: 8082
+  servlet:
+    context-path:
+      /
+
+spring:
+  datasource:
+    jdbc-url: ${SPRING_DATASOURCE_URL}?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  mustache:
+    servlet:
+      expose-request-attributes: true
