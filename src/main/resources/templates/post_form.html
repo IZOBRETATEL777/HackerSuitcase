@@ -7,6 +7,14 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url("background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,8 +22,8 @@
     <form th:action="@{/posts/new}" th:object="${newPost}" method="POST">
         <form>
             <div class="form-group">
-                <label for="title" Title</label>
-                    <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title">
+                <label for="title">Title</label>
+                <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Title">
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
