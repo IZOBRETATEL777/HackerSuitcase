@@ -24,7 +24,7 @@
 </head>
 <body>
 	<div th:replace="header :: content"></div>
-	<div class="container text-center">
+	<div class="container text-center text-light">
 		<div>
 			<h1>User Registration - Sign Up</h1>
 		</div>
@@ -42,7 +42,7 @@
 				<label class="col-4 col-form-label">Password: </label>
 				<div class="col-8">
 					<input type="password" th:field="*{password}" class="form-control" 
-							required minlength="6" maxlength="10"/>
+							required minlength="8"/>
 				</div>
 			</div>
 			
