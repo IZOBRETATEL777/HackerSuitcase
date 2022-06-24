@@ -7,31 +7,23 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            background-image: url("background.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-    </style>
 </head>
 
-<body>
+<body class="bg-dark">
     <div th:replace="header :: content"></div>
 
-    <div class="container">
+    <div class="container bg-dark">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-light">
                 <p th:text="${post.getCreated()} ? ${#calendars.format(post.getCreated(), 'HH:mm dd MMMM yyyy')}"></p>
                 <p th:text="${post.getAuthor().getFirstName()}"></p>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container bg-dark">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-light">
                 <h2 th:text="${post.getTitle()}"></h2>
                 <p th:text="${post.getContent()}"></p>
             </div>
@@ -46,15 +38,15 @@
 
 
 
-    <div>
+    <div class="bg-dark text-light">
         <h3>Comments</h3>
         <ul>
             <li th:each="comment : ${post.getComments()}">
                 <p th:text="${comment.getAuthor().getFirstName()}"></p>
                 <p th:text="${comment.getCreated()}"></p>
                 <p th:text="${comment.getContent()}"></p>
-                <div class="row" >
-                    <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 text-light">
                         <a th:href="@{/comments/delete/} + ${comment.id}" class="btn btn-danger" th:if="${authentication.getName()} eq ${comment.getAuthor().getEmail()}">Delete</a>
                         <a th:href="@{/comments/like/} + ${comment.id}" class="btn btn-primary">Like</a>
                         <a th:href="@{/comments/dislike/} + ${comment.id}" class="btn btn-primary">Dislike</a>
@@ -65,9 +57,9 @@
         </ul>
     </div>
 
-    <div class="container" sec:authorize="isAuthenticated()">
+    <div class="container bg-dark" sec:authorize="isAuthenticated()">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-light">
                 <form th:action="@{/posts/} + ${post.id}" th:object="${newComment}" method="POST">
                     <form>
                         <div class="form-group">
