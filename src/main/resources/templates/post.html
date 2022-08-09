@@ -25,7 +25,9 @@
         <div class="row">
             <div class="col-md-12 text-light">
                 <h2 th:text="${post.getTitle()}"></h2>
-                <p th:text="${post.getContent()}"></p>
+                <div th:each="line: ${post.getContent().split('\n')}">
+                    <p th:text="${line}"></p>
+                </div>
             </div>
         </div>
 
@@ -44,7 +46,9 @@
             <li th:each="comment : ${post.getComments()}">
                 <p th:text="${comment.getAuthor().getFirstName()}"></p>
                 <p th:text="${comment.getCreated()}"></p>
-                <p th:text="${comment.getContent()}"></p>
+                <div th:each="line: ${comment.getContent().split('\n')}">
+                    <p th:text="${line}"></p>
+                </div>
                 <div class="row">
                     <div class="col-md-12 text-light">
                         <a th:href="@{/comments/delete/} + ${comment.id}" class="btn btn-danger" th:if="${authentication.getName()} eq ${comment.getAuthor().getEmail()}">Delete</a>
