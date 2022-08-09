@@ -25,7 +25,7 @@ public class Comment {
     @Column(nullable = false)
     Timestamp created;
 
-    @Column
+    @Column(columnDefinition = "longtext")
     String content;
 
     @Column(nullable = false, columnDefinition = "bigint default 0")

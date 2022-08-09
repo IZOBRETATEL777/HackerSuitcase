@@ -28,7 +28,7 @@ public class Post {
     @Column(nullable = false)
     String title;
 
-    @Column
+    @Column(columnDefinition = "longtext")
     String content;
 
     @ManyToOne
